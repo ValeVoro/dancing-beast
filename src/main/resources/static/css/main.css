@@ -1,0 +1,342 @@
+@import './font-awesome.min.css';
+
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  100% {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+
+}
+
+@keyframes progressBarFill {
+  0%   { width: 0%; }
+  100% { width: 100%; }
+}
+
+body{
+ 	height: 100%;
+	width: 100%;  
+	background: url('/img/stars.svg'); 
+	position: absolute;
+	background-position: 0% 0%;
+	background-repeat: repeat;
+}
+
+
+
+.login, .dashboardCont, .registerCont, .danceCont{
+   font-family: 'Josefin Sans', sans-serif;
+   padding:40px 0px;
+   padding-top: 20px;
+   padding-bottom: 20px;
+  
+}
+.loginerror{
+	color: red;
+}
+
+
+h1{
+    font-weight:600;
+    font-family: 'Josefin Sans', sans-serif;
+    text-transform:uppercase;
+    text-align:center;
+    color:#444;
+}
+
+.inner-form, .dashboard, .register, .danceFloor{
+    background:#FFF;
+    padding:50px;
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.4);
+	border-radius: 10px; 
+}
+
+.hiddenSec{
+	display: none;
+}
+
+label{
+    font-weight:400;
+    font-size:15px;
+}
+#resultPane h2, #resultPane h3, #resultPane h1{
+	text-align: center;
+	margin-top: 15px;
+}
+.createOneButton a{
+	color: #fff;
+}
+.createOneButtonCont{
+	padding: 0 !important;
+}
+
+.form-control {
+    box-shadow: none;
+    outline: 0;
+    border-radius:0;
+    color: #565656;
+    font-size:14px;
+    padding:30px 10px;
+    margin-bottom:30px;
+    border: 1px solid #f2f2f2;
+    background: #f2f2f2;
+}
+.register-msg{
+	font-size: 18px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 15px;
+}
+
+.btn{ 
+   
+    border: none;
+    border-radius: 0;
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 15px 30px;
+    text-transform: uppercase;
+    width:100%;
+}
+.login-btn{
+	background: #b88cd2;
+}
+.login-btn:hover{
+	background: #87659b;
+}
+
+.carousel-item{
+	height: 400px;
+}
+#carouselControls a, #carouselControls a span{
+	color: #000;
+}
+.carousel-control-prev-icon {
+ background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
+
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
+
+.dashSections{
+	max-height: 600px;
+	padding: 10px !important;
+}
+.dashSections ul{
+	border-bottom: 2px solid #ccc;
+}
+.dashSections li a{
+	border:none !important;
+	border-bottom: none !important;
+	color: #000;
+}
+
+.nav-tabs .nav-item{
+	margin-bottom: -2px !important;	
+}
+.nav-link.active{
+	border-bottom: 2px solid #333 !important;
+	border-color: #29335c !important;
+	color: #000 !important;
+}
+.dashSections .nav-link span{
+	display: block;
+	text-align: center;
+	margin-bottom: 5px;
+}
+.dashSections .nav-link i{
+	color: #666;
+	background-color: #CCC;
+	border-radius: 50%;
+	font-size: 2rem;
+	padding: 10px;
+}
+.dashSections .nav-link.active i{
+	color: #fff;
+	background-color: #29335c;
+}
+.dashPerson{
+	/* border: 1px solid red; */
+	max-height: 600px;
+	padding: 10px;
+	text-align: center;
+}
+.dashPerson .container, .dashSections .container{
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.4);
+	border-radius: 3px;
+	padding:0;
+}
+.dashPerson h2 i{
+	color: #FFF;
+	font-size: 1rem;
+	vertical-align: text-top;
+	top: 5px;
+}
+.dashPerson h2{
+	padding-left: 25px;
+}
+.dashPerson h2:hover i{
+	color: #0000a0 !important;
+}
+.cardHeader{
+	height: 25%;
+	background-color: #DDD;
+}
+.avatar{
+	margin-top: -25%;
+	text-align: center;
+}
+.avatarImage{
+	border-radius: 50%;
+	border: 5px solid rgba(255, 255, 255, 0.5);
+	width: 50%;
+}
+.alertInModal{
+	margin-top: 10px;
+}
+.tab-pane{
+	padding: 20px;
+	text-align: center;
+	vertical-align: center;
+}
+.tab-pane i{
+	font-size: 8rem;
+	color: #29335c;
+}
+
+
+/* ACHIEVEMENT SECTION CAROUSEL */
+#dancesCarousel{
+	box-shadow: 2px 2px rgba(0,0,0,0.3);
+}
+#dancesCarousel .singleLevel{
+	height: 90%; 
+	/* border: 1px solid red; */
+	margin: 5px;
+	text-align: center;
+	padding: 0;
+}
+#dancesCarousel .singleLevel:not(.grayFilt):hover{
+	animation-name: pulse;
+	animation-duration: 1s;
+  	animation-fill-mode: both;
+}
+
+
+#dancesCarousel .singleLevel.grayFilt{
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+
+#dancesCarousel .singleLevel.grayFilt p{
+    color: black;
+    text-shadow: none;
+}
+#dancesCarousel .singleLevel>div{
+	height: 85%;
+	background-position: 50% 50%;
+	background-size: cover;
+	border: 4px solid #000;
+
+}
+#dancesCarousel .singleLevel p{
+	margin: auto;
+	line-height: 35px;
+	font-size: 25px;
+	font-weight: 1000;
+	color: white;
+	text-shadow: 4px 4px rgba(0,0,0,0.8);
+	pointer-events: none;
+}
+#dancesCarousel .singleLevelInner{
+	pointer-events: none;
+}
+#dancesCarousel .singleLevel span{
+	bottom: -30px;
+	z-index: 1000;
+	color: white;
+	text-shadow: 4px 4px rgba(0,0,0,0.8);
+	font-weight: 20;
+	text-transform: uppercase;
+	pointer-events: none;
+}
+
+#dancesCarousel{
+	height: 130px;
+	background-color: #222;
+	border-radius: 5px;
+}
+#dancesCarousel .carousel-inner{
+	padding-left: 10%;
+	padding-right: 10%;
+}
+#dancesCarousel .carousel-item{
+	height: 100%;
+}
+#dancesCarousel .carousel-item-next, #dancesCarousel .carousel-item-prev, #dancesCarousel .carousel-item.active {
+    display: flex;
+}
+#dancesCarousel .carousel-control-next, #dancesCarousel .carousel-control-prev {
+	width: 10%;
+}
+#userAchievements .carouselWrapper{
+	text-align: left;	
+	margin-bottom: 15px;
+}
+.danceFloor img{
+	width: 100%;
+}
+.danceFloor{
+	padding: 0;
+	justify-content: center;
+}
+#staticCanvas, #defaultCanvas{
+	overflow: hidden;
+}
+.danceCont .progress{
+	border: 2px solid black;
+	padding: 0;
+	margin: 10px;
+	top: 10px;
+	box-sizing: content-box;
+}
+
+#progressBar{
+	will-change: width;
+	width: 0%;
+}
+#movementCanvas video{
+	height: 75%;
+}
+#defaultCanvas a:not(.afterInst):not(.quitDanceBtn){
+	margin-top: 10%;
+	margin-bottom: 10%;
+}
+.afterInst{
+	position: absolute;
+	left: 0%;
+	right: 0%;
+	top: 10%;
+}
+.afterInst.btn-success{
+	margin-top: 100px;
+}
+.quitDanceBtn{
+	margin-bottom: 15px;
+}
+
+
+
+    
+
+
+
+
+
