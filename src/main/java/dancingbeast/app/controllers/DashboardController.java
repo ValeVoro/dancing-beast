@@ -57,10 +57,10 @@ public class DashboardController {
 		        List<KeyStamp> result = new ArrayList<KeyStamp>();
 		        for(int i = 0 ; i < list.size() ; i++){
 		            KeyStamp example = new KeyStamp();
-		            HashMap<String, ?> map1 = (HashMap) list.get(i);
+		            HashMap<String, Object> map1 = (HashMap) list.get(i);
 		            example.setKeyId( Integer.parseInt(map1.get("keyId").toString()));
-		            example.setPressed( (boolean) map1.get("pressed"));
-		            example.setTime( new Timestamp( (long) map1.get("time") ));
+		            example.setPressed( (Boolean) map1.get("pressed"));
+		            example.setTime( new Timestamp( (Long) map1.get("time") ));
 		            result.add(example);
 		        }
 
