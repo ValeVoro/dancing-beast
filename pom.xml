@@ -117,11 +117,7 @@
 		</dependency>
 	</dependencies>
 
-<sec:authentication-manager alias="authenticationManager" erase-credentials="false">
-    <sec:authentication-provider
-        user-service-ref="userDetailsService" />
-</sec:authentication-manager>
-<security:form-login always-use-default-target="true" /> 
+
 
 	<build>
 		<plugins>
