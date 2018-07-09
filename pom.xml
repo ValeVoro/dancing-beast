@@ -110,13 +110,19 @@
     <version>1.9.22</version>
 </dependency>
 
-		<dependency>
-			<groupId>org.thymeleaf.extras</groupId>
+<dependency>
+		<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
-			   <version>2.1.2.RELEASE</version>
-		</dependency>
-	</dependencies>
+		   <version>2.1.2.RELEASE</version>
+</dependency>
 
+</dependencies>
+   <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="registerUserDetailsService">
+            <password-encoder hash="md5" />
+        </authentication-provider>
+        <authentication-provider user-service-ref="registerUserDetailsService"/> <!-- this provider is used to login user from other system, which has encrypted password. -->
+    </authentication-manager>
 
 
 	<build>

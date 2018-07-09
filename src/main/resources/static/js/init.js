@@ -25,7 +25,7 @@ function postData(url, data, callback) {
 	    referrer: 'no-referrer', // *client, no-referrer
 	  })
 	  .then(function(response) {
-            return response.json();
+            return response;
         }).then(function(data) {
             if(window.dev) {console.log("--------- Fetch Version");}
             callback(data);

@@ -11,14 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
-import dancingbeast.app.entities.Score;
 import dancingbeast.app.entities.User;
 
 @Repository
@@ -46,8 +47,15 @@ public class UsersRepo {
 
 		int levId = template.queryForObject(prefetch, Integer.class);
 
-		int existingScore = template.queryForObject("SELECT score FROM scores WHERE level=" + levId +
-				" AND username='" + name + "'", Integer.class);
+		int existingScore = template.query("SELECT score FROM scores WHERE level=" + levId +
+				" AND username='" + name + "'", new ResultSetExtractor<Integer>() {
+			        @Override
+			        public Integer extractData(ResultSet rs) throws SQLException,
+			                                                       DataAccessException {
+			            return rs.next() ? rs.getInt("score") : 0;
+			        }
+			    });
+	
 		String finalSql;
 		if(existingScore == 0) {
 			finalSql = "INSERT INTO scores (id, username, level, score, passed) "
@@ -92,6 +100,7 @@ public class UsersRepo {
 	        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	        
 	    } catch (ServletException e) {
+	    	e.printStackTrace();
 	        System.out.print("auto login went wrong");
 	    } 
 	    

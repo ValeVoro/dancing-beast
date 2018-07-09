@@ -66,13 +66,7 @@ class App extends React.Component {
 		 const obj = {"beast": newbeast, "name": newname, "password": newpassword};
 		   
 		 postData(`http://${window.location.host}/sendRegistration`, obj, (d) => {
-			 if(d == -1){
-				 window.location = `${window.location.host}/login`; 
-			 }else{
-				 window.location = `${window.location.host}/dashboard`;
-
-			 }
-
+			 window.location = `http://${window.location.host}/dashboard`;
 		 });
 		    		   
 	 }
@@ -122,7 +116,7 @@ class App extends React.Component {
 	 }
 	 skipBack(e){
 		 e.preventDefault();
-		 window.location = `@{window.location.port}/login`;
+		 window.location = `${window.location.port}/login`;
 	 }
 	 
 	 handleSubmit(event) {
@@ -140,15 +134,14 @@ class App extends React.Component {
 		  const creatureCount = this.props.creatureCount;
 		  var newVal = value + direction;
 		  if(newVal == creatureCount){
-			  newVal = 0;
-		  }else if(newVal == -1){
+			  newVal = 1;
+		  }else if(newVal == 0){
 			  newVal = creatureCount-1;
 		  }
 		  const video = this.refs[newVal];
+		  video.currentTime = 0;
 		  video.play();
 		  this.setState({value: `${newVal}`});	  
-		 
-
 	  }
 	
 	  
@@ -382,7 +375,7 @@ class App extends React.Component {
 			</div>
 			<hr></hr>
 			<div class="col-12">
-				<img class="col-8  col-lg-4 m-1" src={this.state.status=='Newbie' ? "/img/Newbie.gif" : "/img/oldschool.jpg"}></img>
+				<img class="col-8  col-lg-4 m-1" src={status=='Newbie' ? "/img/Newbie.gif" : "/img/oldschool.jpg"}></img>
 				<h6>{this.props.status}</h6>
 				</div>
 			<Modal modalTitle="Edit name" handleEditSubmit={this.handleNameEdit} currentInput={this.props.name} />
@@ -489,13 +482,19 @@ class App extends React.Component {
 	 }
 	 
 	 render() {
-		 var dancesNumber = Object.keys(groupJSON(scores, "dance"));
+		 var dancesNumber = Object.keys(groupJSON(dances, "dance"));
+		 var scoresNumber = groupJSON(scores, "dance");
+
 		 var carousels = [];
-		 for(var i=0; i< dancesNumber.length; i++){
-			 var nam = dancesNumber[i];
-			 var lev = groupJSON(scores, "dance")[nam].length;
-			 var sc = groupJSON(scores, "dance")[nam];
-			 console.log(lev);
+		 for(var i=0; i< dances.length; i++){
+			 var nam = dances[i][0];
+			
+		
+			 var lev = dances[i][1];
+			 console.log(scores);
+
+			 var sc = scoresNumber[nam] ? scoresNumber[nam] : 0;
+			 
 			 carousels.push(<DanceCarousel id={i} name={nam} levels={lev} score={sc} />);
 		 }
 	 return (
@@ -529,42 +528,47 @@ class App extends React.Component {
 		 var indents = [];
 		 var contNum =  Math.ceil( parseInt(this.props.levels) / 3);
 		 var inLast = parseInt(this.props.levels) % 3 == 0 ? 3 : parseInt(this.props.levels) % 3;
+		 var markDisabled = false;
 		 for (var i = 0; i < contNum; i++) { 
 			 var singles = [];
-			 var markDisabled = false;
+			 
 			 if(i == contNum-1){
 				 for(var a = 3*i; a < this.props.levels; a++){
 
-					 let thumb = `url( /img/carousel-thumb/${this.props.id+1}_${this.props.score[a].level}.png)`;
+					 let thumb = `url( /img/carousel-thumb/${this.props.id+1}_${a+1}.png)`;
+					 let myScore = this.props.score[a] ? this.props.score[a].score : 0;
 					 singles.push(
-					<div level={this.props.score[a].level} dance={this.props.score[a].dance} class={"col-4 singleLevel "+ (markDisabled ? "grayFilt" : "")} onClick={markDisabled ? "" : this.handleClick}>
+					<div level={a+1} dance={this.props.name} class={"col-4 singleLevel "+ (markDisabled ? "grayFilt" : "")} onClick={markDisabled ? "" : this.handleClick}>
 					 <div class="singleLevelInner " style={{backgroundImage: thumb}}>
-					 	<p>score<br></br>{this.props.score[a].score}</p>
+					 	<p>score<br></br>{myScore}</p>
 					 	
 					 </div>
 					 <span>Level {a+1}</span>
 					</div>);
-					 if(this.props.score[a].score==0){
+					 if(myScore==0){
 						 markDisabled = true;
 					 }
 				 }
 			 }else{
 				 for(var a = 3*i; a < (3*i+3); a++){
-					 let thumb = `url( /img/carousel-thumb/${this.props.id+1}_${this.props.score[a].level}.png)`;
+					 let thumb = `url( /img/carousel-thumb/${this.props.id+1}_${a+1}.png)`;
+					 console.log(this.props.score);
+					 let myScore = this.props.score[a] ? this.props.score[a].score : 0;
+
 					 singles.push(
-					<div level={this.props.score[a].level} dance={this.props.score[a].dance} class={"col-4 singleLevel "+ (markDisabled ? "grayFilt" : "")} onClick={markDisabled ? "" : this.handleClick}>
+					<div level={a+1} dance={this.props.name} class={"col-4 singleLevel "+ (markDisabled ? "grayFilt" : "")} onClick={markDisabled ? "" : this.handleClick}>
 					 <div class="singleLevelInner " style={{backgroundImage: thumb}}>
-					 	<p>score<br></br>{this.props.score[a].score}</p>
+					 	<p>score<br></br>{myScore}</p>
 					 	
 					 </div>
 					 <span>Level {a+1}</span>
 					</div>);
-					 if(this.props.score[a].score==0){
+					 if(myScore==0){
 						 markDisabled = true;
 					 }
 				}
 			 }
-		     indents.push(	<div className={"carousel-item " + (i==contNum-1 ? 'active' : '')} id={`levelCarouselItem${i}`}>
+		     indents.push(	<div className={"carousel-item " + (i==0 ? 'active' : '')} id={`levelCarouselItem${i}`}>
 		     	{singles}
 		     </div>);
 		  }
@@ -626,7 +630,7 @@ class App extends React.Component {
 	 return (
 		<div class={"col-12 " + (this.props.visible ? "" : "hiddenSec")}>
 			<div class="progress col-6">
-				<div class={"progress-bar progress-bar-striped progress-bar-animated"} style={{animation: "progressBarFill steps(70, start) " + dur2}} id="progressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" ></div>
+				<div class={"progress-bar progress-bar-striped progress-bar-animated"} style={{animation: "progressBarFill steps(100, start) " + dur2}} id="progressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" ></div>
 			</div>
 		</div>
 	  );
@@ -786,7 +790,8 @@ class App extends React.Component {
 	 }
 	 handleDanceEnd(){
 		 var that = this;
-		 postData(`http://${window.location.host}/sendSequence`, this.state.seq, (d) => {
+		 postData(`http://${window.location.host}/sendSequence`, this.state.seq, (draw) => {
+			 var d = draw.json();
 			 var msg;
 			 if(d > 84){
 				 msg = "Great job!";
@@ -833,7 +838,7 @@ class App extends React.Component {
 	
 	 return (
 		<div id="movementCanvas" class="col-12">
-		<ProgressBar startet={this.state.started} visible={this.state.result == -1}/>
+		<ProgressBar started={this.state.started} visible={this.state.result == -1}/>
 
 			<video onEnded={this.handleDanceEnd} id="hj_default" class={"col-12 " + (this.state.result == -1 ? "" : "hiddenSec")} ref="hj_default" >
 				<source src="/img/defaults/dance-final.mp4" ref="videoMovementSrc" type="video/mp4"></source>

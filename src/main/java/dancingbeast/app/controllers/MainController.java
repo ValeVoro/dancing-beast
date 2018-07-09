@@ -50,7 +50,7 @@ public class MainController {
 		String currentPrincipalName = authentication.getName();
 		int beast = usersRepo.getBeastByName(currentPrincipalName);
 		String beastType = usersRepo.getBeastTypeById(beast);
-		List<String[]> dances = dancesRepo.getAllDances();
+		List<Object> dances = dancesRepo.getAllDances();
 		List<Score> scores = dancesRepo.getScores(currentPrincipalName);
 		String status = usersRepo.timeSinceRegistration(currentPrincipalName) < 604800000 ? "Newbie" : "Old-timer";
 
@@ -107,7 +107,7 @@ public class MainController {
 	}	
 	  
 	  @RequestMapping("/sendRegistration")
-		 public int registerUser(@RequestBody User user, Model model, HttpServletRequest req, HttpServletResponse resp){
+		 public String registerUser(@RequestBody User user, Model model, HttpServletRequest req, HttpServletResponse resp){
 		  	try {
 		  		String name = user.getName();
 		  		String beast = user.getBeast() + "";
@@ -120,19 +120,17 @@ public class MainController {
 		  		
 		        
 		         // Place the new Authentication object in the security context.
-		      //   SecurityContextHolder.getContext().setAuthentication(auth);
+		         SecurityContextHolder.getContext().setAuthentication(auth);
 
 		         //this step is import, otherwise the new login is not in session which is required by Spring Security
 		         req.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
 		     
 		         
 		         String currentPrincipalName = auth.getName();
-		         return 1;
-		         
 			} catch(DataAccessException e) {
 				e.printStackTrace();
-				return -1;
 			}
+		  	return "redirect:/dashboard";
 		 }
 	  
 	  @RequestMapping(value="/editName")

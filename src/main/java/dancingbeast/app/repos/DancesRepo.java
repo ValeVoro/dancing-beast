@@ -18,21 +18,19 @@ public class DancesRepo {
 	@Autowired
 	private JdbcTemplate template;
 	
-	public List<String[]> getAllDances(){
-		List<String[]> danceList = template.query("SELECT dances.dance as dance, "
+	public List<Object> getAllDances(){
+		List<Object> danceList = template.query("SELECT dances.dance as dance, "
 				+ "COUNT(levels.id) as levels FROM dances INNER JOIN levels "
 				+ "ON dances.id=levels.dance GROUP BY dances.dance", allDanceRowmapper);
 		return danceList;
 	}
 	
-	public RowMapper<String[]> allDanceRowmapper = new RowMapper<String[]>() {
+	public RowMapper<Object> allDanceRowmapper = new RowMapper<Object>() {
 		@Override
-		public String[] mapRow(ResultSet rs, int i) throws SQLException {
-			String[] result = new String[2];
+		public Object mapRow(ResultSet rs, int i) throws SQLException {
 			String dance = rs.getString("dance");
 			String levels = rs.getInt("levels") + "";
-			result[0] = dance;
-			result[1] = levels;
+			Object result = new Object[]{dance, levels};
 			return result;
 		}
 	};
@@ -42,7 +40,7 @@ public class DancesRepo {
 				+ "levels.levelNr as level, scores.score as score FROM levels " + 
 				"FULL JOIN scores ON scores.level=levels.id " + 
 				"FULL JOIN dances ON levels.dance=dances.id " + 
-				"WHERE scores.username='"+ username +"' OR scores.username is null " + 
+				"WHERE scores.username='"+ username +"'  " + 
 				"GROUP BY dances.dance, levels.levelNr, scores.score", scoresRowmapper);
 		return scoresList;
 	}
