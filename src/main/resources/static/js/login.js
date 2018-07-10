@@ -113,10 +113,15 @@ class App extends React.Component {
 		    this.handleSubmit = this.handleSubmit.bind(this);
 		    this.getChosen = this.getChosen.bind(this);
 		    this.skipBack = this.skipBack.bind(this);
+		    this.preventDefault = this.preventDefault.bind(this);
 	 }
 	 skipBack(e){
 		 e.preventDefault();
 		 window.location = `${window.location.port}/login`;
+	 }
+	 
+	 preventDefault(event){
+		 event.preventDefault();
 	 }
 	 
 	 handleSubmit(event) {
@@ -178,7 +183,7 @@ class App extends React.Component {
 		<button  class="btn btn-warning col-6 backtoLoginButton" onClick={this.skipBack}>
  		<i class="fa fa-angle-double-left"></i><span> back to login</span>
 		</button>
-		<button title={(this.state.value == 1 ? '' : 'This beast is not available yet')} class={"btn btn-success col-4 offset-1 " + (this.state.value == 1  ? '' : 'disabled')} onClick={this.handleSubmit}>
+		<button title={(this.state.value == 1 ? '' : 'This beast is not available yet')} class={"btn btn-success col-4 offset-1 " + (this.state.value == 1  ? '' : 'disabled')} onClick={this.state.value != 1  ? this.preventDefault : this.handleSubmit}>
 		<span>next </span><i class="fa fa-angle-double-right"></i>
 	    </button>
 	  </div>
@@ -791,7 +796,8 @@ class App extends React.Component {
 	 handleDanceEnd(){
 		 var that = this;
 		 postData(`http://${window.location.host}/sendSequence`, this.state.seq, (draw) => {
-			 var d = draw.json();
+			 var d = parseInt(draw);
+			 console.log(d);
 			 var msg;
 			 if(d > 84){
 				 msg = "Great job!";

@@ -8,6 +8,10 @@ public class Score {
 	
 	
 	
+	public Score() {
+		super();
+	}
+
 	public Score(String dance, int level, int score) {
 		super();
 		this.dance = dance;

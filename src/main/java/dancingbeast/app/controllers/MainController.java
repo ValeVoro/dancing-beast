@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import dancingbeast.app.entities.Level;
 import dancingbeast.app.entities.Score;
 import dancingbeast.app.entities.User;
 import dancingbeast.app.repos.DancesRepo;
@@ -106,32 +107,7 @@ public class MainController {
 	     return "redirect:/dashboard";
 	}	
 	  
-	  @RequestMapping("/sendRegistration")
-		 public String registerUser(@RequestBody User user, Model model, HttpServletRequest req, HttpServletResponse resp){
-		  	try {
-		  		String name = user.getName();
-		  		String beast = user.getBeast() + "";
-		  		String password = user.getPassword();
-		  		
-		  		usersRepo.addNewUser(beast, name, password);
-		  		usersRepo.authWithHttpServletRequest(req, resp, name, password);	
-		 		
-		  		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		  		
-		        
-		         // Place the new Authentication object in the security context.
-		         SecurityContextHolder.getContext().setAuthentication(auth);
-
-		         //this step is import, otherwise the new login is not in session which is required by Spring Security
-		         req.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
-		     
-		         
-		         String currentPrincipalName = auth.getName();
-			} catch(DataAccessException e) {
-				e.printStackTrace();
-			}
-		  	return "redirect:/dashboard";
-		 }
+	
 	  
 	  @RequestMapping(value="/editName")
 		 public String changeName(@RequestBody String name, HttpServletRequest req, HttpServletResponse res){

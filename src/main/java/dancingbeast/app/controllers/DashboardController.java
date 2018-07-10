@@ -39,7 +39,7 @@ public class DashboardController {
 
 	
 	 @RequestMapping(value="/sendSequence", method = RequestMethod.POST)
-	 public int processSequence(@RequestBody List<KeyStamp> seq) {
+	 public String processSequence(@RequestBody List<KeyStamp> seq) {
 		 	
 		 try {
 
@@ -98,12 +98,12 @@ public class DashboardController {
 				String currentPrincipalName = authentication.getName();
 				usersRepo.setScore(currentPrincipalName, dance, level, (int) score);
 				
-		 return  (int) score;
+		 return  ((int) score) + ""; 
 		
 		 }catch(Exception e) {
 			 e.printStackTrace();
 		 }
-		 return -1;
+		 return "-1";
 	 }
 }
 
