@@ -65,8 +65,8 @@ class App extends React.Component {
 		 const newpassword = value;
 		 const obj = {"beast": newbeast, "name": newname, "password": newpassword};
 		   
-		 postData(`http://${window.location.host}/sendRegistration`, obj, (d) => {
-			 window.location = `http://${window.location.host}/dashboard`;
+		 postData(`https://${window.location.host}/sendRegistration`, obj, (d) => {
+			 window.location = `https://${window.location.host}/dashboard`;
 		 });
 		    		   
 	 }
@@ -227,7 +227,7 @@ class App extends React.Component {
 	  handleChange(event) {
 		    const value = event.target.value;
 
-		    getData(`http://${window.location.host}/setName?name=${value}`, (data) => {
+		    getData(`https://${window.location.host}/setName?name=${value}`, (data) => {
 		    	console.log("Checking user name...");
 		    	console.log(data)
 		    	if(data){
@@ -358,7 +358,7 @@ class App extends React.Component {
 	}
 	handleNameEdit(value){
 		 var that = this;
-		 postData(`http://${window.location.host}/editName`, value);
+		 postData(`https://${window.location.host}/editName`, value);
 	}
 
 	
@@ -444,7 +444,7 @@ class App extends React.Component {
 	    const value = event.target.value;
 	    this.setState({value: `${value}`});
 	    
-	    getData(`http://${window.location.host}/setName?name=${value}`, (data) => {
+	    getData(`https://${window.location.host}/setName?name=${value}`, (data) => {
 	    	console.log("Checking user name...");
 	    	console.log(data)
 	    	if(data && this.state.value.length > 0){
@@ -524,7 +524,7 @@ class App extends React.Component {
 	    if(dance != "Hip hop" || level != 1){
 	    	alert("Sorry, this level is not developed yet!");
 	    }else{
-		    window.location = `http://${window.location.host}/start?dance=${dance}&level=${level}`;
+		    window.location = `https://${window.location.host}/start?dance=${dance}&level=${level}`;
 
 	    }
 
@@ -795,7 +795,7 @@ class App extends React.Component {
 	 }
 	 handleDanceEnd(){
 		 var that = this;
-		 postData(`http://${window.location.host}/sendSequence`, this.state.seq, (draw) => {
+		 postData(`https://${window.location.host}/sendSequence`, this.state.seq, (draw) => {
 			 var d = parseInt(draw);
 			 console.log(d);
 			 var msg;
@@ -850,7 +850,7 @@ class App extends React.Component {
 				<source src="/img/defaults/dance-final.mp4" ref="videoMovementSrc" type="video/mp4"></source>
 			</video>
 			
-			<a class={"btn btn-warning col-6 offset-3 quitDanceBtn " + (this.state.result == -1 ? "" : "hiddenSec")} href={`http://${window.location.host}/dashboard`}>back to dashboard</a>
+			<a class={"btn btn-warning col-6 offset-3 quitDanceBtn " + (this.state.result == -1 ? "" : "hiddenSec")} href={`https://${window.location.host}/dashboard`}>back to dashboard</a>
 
 			<Resultpane handleNewStart={this.handleNewStart} visible={this.state.result != -1} score={this.state.result} msg={this.state.msg} />
 			
@@ -868,7 +868,7 @@ class App extends React.Component {
 	 render() {
 		 console.log(ReactDOM);
 		 var sc = this.props.score + " / 100"; 
-		 var dash = `http://${window.location.host}/dashboard`;
+		 var dash = `https://${window.location.host}/dashboard`;
 	 return (
 		<div id="resultPane" class={"col-12 " + (this.props.visible ? "" : "hiddenSec")} >
 			<h1>Your score:</h1>
