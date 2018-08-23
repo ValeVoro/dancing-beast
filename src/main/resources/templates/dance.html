@@ -2,21 +2,9 @@
     <head th:fragment="common-header">
     <meta charset="utf-8" />
     <title>Dance!</title>
+    <link rel="icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
     
-    <script th:src="@{/js/lib/jquery-3.2.1.min.js}" crossorigin media="all" type="text/javascript" ></script>
-	<script src="//cdn.jsdelivr.net/bluebird/3.5.0/bluebird.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.js"></script>
-    <script th:src="@{/js/lib/bootstrap/js/bootstrap.bundle.min.js}" crossorigin type="text/javascript" ></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/js/lib/bootstrap/css/bootstrap.min.css}"/>
-    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css"  />
-    <script  type="text/javascript" crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
-	<script  type="text/javascript" crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
-	<script  type="text/javascript" crossorigin th:src="@{/js/lib/browser.min.js}"></script>
-    <script type="text/javascript" crossorigin src="https://unpkg.com/react-router/umd/react-router.min.js"></script>
-    <script type="text/javascript" crossorigin src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
-    <script type="text/javascript" th:src="@{/js/init.js}"></script>
-    <script type="text/babel" th:src="@{/js/dashboard.js}"></script>
-    <script type="text/babel" th:src="@{/js/login.js}"></script>
+
   </head>
   <body>
   
@@ -36,6 +24,7 @@
        
      
 	</script> 
+      <script type="application/javascript"  th:src="@{/generated/app-bundle.js}"/></script>
 
   </body>
   
