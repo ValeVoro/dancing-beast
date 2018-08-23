@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import dancingbeast.app.entities.User;
-import dancingbeast.app.entities.UserDto;
 import dancingbeast.app.repos.UsersRepo;
 
 public class UserDetailsServiceImpl implements UserDetailsService{
