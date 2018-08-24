@@ -2,11 +2,12 @@
 
 
 
-a ~~ silly ~~ simple Spring Boot & React dancing game.
+a ~~silly~~ simple Spring Boot & React dancing game.
 
 Tested with Chrome 68.0.3440.106.
 
 **Warning**: app performance may be disrupted if your browser blocks http requests.
+
 **Warning**: please note that all sensitive data such as database credentials was replaced.
 
 
