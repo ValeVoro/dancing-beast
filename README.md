@@ -1,4 +1,4 @@
-# Dancing Beast
+# Dancing Beast [![CircleCI](https://circleci.com/gh/ValeVoro/dancing-beast.svg?style=svg)](https://circleci.com/gh/ValeVoro/dancing-beast)
 
 
 
